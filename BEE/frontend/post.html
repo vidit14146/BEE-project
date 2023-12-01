@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Display</title>
+</head>
+<body>
+    <h1>Posts</h1>
+    <ul id="postList"></ul>
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script >
+        $(document).ready(function () {
+    // Fetch all posts
+    $.get('http://localhost:3000/getAllPost', function (posts) {
+        // Update the DOM with the posts
+        displayPosts(posts);
+    });
+
+    function displayPosts(posts) {
+        const postList = $('#postList');
+
+        // Clear existing posts
+        postList.empty();
+
+        // Iterate through each post and append to the list
+        posts.forEach(function (post) {
+            const listItem = `<li>${post.fullname} - ${post.username} - ${post.email}</li>`;
+            postList.append(listItem);
+        });
+    }
+});
+
+    </script>
+</body>
+</html>
